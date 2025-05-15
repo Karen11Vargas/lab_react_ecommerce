@@ -1,4 +1,8 @@
+import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { ShoppingCartContext } from '../context/CardContext';
 
 const leftRoutes  = [
     {to: '/',text:'All'},
@@ -15,6 +19,8 @@ const rightRoutes = [
     ];
 
 const Navbar = () => {
+    const context = useContext(ShoppingCartContext);
+    
     return (
         <nav className="flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-norma top-0">
            <ul className="flex items-center gap-3">
@@ -37,6 +43,10 @@ const Navbar = () => {
                        {route.text}</NavLink>
                     </li>
                 ))}
+                 <li className='flex items-center'>
+                 <ShoppingBagIcon className='h-6 w-5' / >
+                 <div>{context.count}</div>
+                </li>
             </ul>
         </nav>
     )

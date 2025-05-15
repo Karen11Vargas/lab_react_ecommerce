@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
+import { getProducts } from "../services/products"
+import ProductDetail from "../components/ProductDetail";
+
 function Home() {
     // Crear estado con la data
     const [items, setItems] = useState(null)
 
     // Efecto para consumir la api
     useEffect(() => {
-        try {
-            fetch('https://fakestoreapi.com/products')
-            .then(response => response.json())
-            .then(data => setItems(data))
-        } catch (error) {
-            console.error(error)
+
+        const getList = async () =>{
+            try {
+                const data = await getProducts();
+                setItems(data);
+            } catch (error) {
+                console.error(error)
+            }
         }
+
+        getList();
+       
       
     },[])
 
@@ -27,7 +35,8 @@ function Home() {
             } 
        
         </div>
-      
+        
+        <ProductDetail />   
         </>
           
       
