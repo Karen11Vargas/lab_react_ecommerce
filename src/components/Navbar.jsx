@@ -44,8 +44,8 @@ const Navbar = () => {
                     </li>
                 ))}
                  <li className='flex items-center'>
-                 <ShoppingBagIcon className='h-6 w-5' / >
-                 <div>{context.count}</div>
+                 <ShoppingBagIcon onClick={context.openCheckout} className='h-6 w-5 cursor-pointer' / >
+                 <div>{context.cardProducts.length}</div>
                 </li>
             </ul>
         </nav>
