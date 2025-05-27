@@ -22,6 +22,14 @@ export const ShoppingCartContextProvider = ({children}) =>{
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
     const openCheckout = () => setIsCheckoutOpen(true)
     const closeCheckout = () => setIsCheckoutOpen(false)
+    const [order, setOrder] = useState([])
+
+    // Checkout Order
+    const checkOutOrder = (products) =>{
+        setOrder([...order, products]);
+        setcardProducts([])
+        setCount(0)
+    }
 
 
     const showDetailProduct  = (productData) =>{
@@ -72,7 +80,9 @@ export const ShoppingCartContextProvider = ({children}) =>{
                     isCheckoutOpen,
                     openCheckout,
                     closeCheckout,
-                    deleteProductToCard
+                    deleteProductToCard,
+                    checkOutOrder,
+                    order
 
                 }
             }>

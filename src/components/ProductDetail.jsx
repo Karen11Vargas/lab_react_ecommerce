@@ -7,7 +7,7 @@ const  ProductDetail = ()  =>{
     const { isDetailOpen,closeDetail, infoProduct }  = useContext(ShoppingCartContext);
 
     return ( 
-        <aside className={`${isDetailOpen ? 'flex' : 'hidden'} product-detail  flex-col fixed right-0 border border-black bg-white rounded-lg`}>
+        <aside className={`${isDetailOpen ? 'flex' : 'hidden'} product-detail scrollable-cards overflow-y-scroll flex-col fixed right-0 border border-black bg-white rounded-lg`}>
             <div className='flex justify-between items-center p-6'>
                 <h2 className='font-medium'>Detail</h2>
                     <XCircleIcon onClick={() => closeDetail()} className='h-6 w-6 cursor-pointer'/>

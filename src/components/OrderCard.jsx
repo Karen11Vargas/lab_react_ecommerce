@@ -3,9 +3,14 @@ import { useContext } from 'react';
 import { ShoppingCartContext } from '../context/CardContext';
 
 const OrderCard  = props =>{
-    const { id, title, imageUrl, price, quantity} = props
+    const { id, title, imageUrl, price, quantity, isOrder} = props
     const { deleteProductToCard }  = useContext(ShoppingCartContext);
 
+    let icon 
+
+    if (!isOrder) {
+        icon = <XMarkIcon onClick={() =>deleteProductToCard(id) } className='h-6 w-6 cursor-pointer'/>
+    }
 
     return (
         <div className="flex justify-between items-center mb-3">
@@ -19,9 +24,11 @@ const OrderCard  = props =>{
 
             </div>
             <div className="flex gap-2 items-center">
-                <p className='text-lg font-medium'>{price}</p>
-                <XMarkIcon onClick={() =>deleteProductToCard(id) } className='h-6 w-6 cursor-pointer'/>
+                <p className='text-lg font-medium'>${price * quantity}</p>
+                {icon}
             </div>
+
+           
         </div>
     );
 }

@@ -14,7 +14,7 @@ const leftRoutes  = [
 
 const rightRoutes = [
     { to: '/my-account', text: 'My Account' },
-    { to: '/my-order', text: 'My Order' },
+    { to: '/my-orders', text: 'My Orders' },
     { to: '/signing', text: 'Sign In' }
     ];
 
