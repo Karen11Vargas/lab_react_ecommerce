@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { getProducts } from "../services/products"
 
 export const ShoppingCartContext = createContext();
 
@@ -64,6 +65,49 @@ export const ShoppingCartContextProvider = ({children}) =>{
     }
 
 
+    // Get Products
+    const [items, setItems] = useState(null)
+
+   
+
+    // Efecto para consumir la api
+    useEffect(() => {
+
+        const getList = async () =>{
+            try {
+                const data = await getProducts();
+                setItems(data);
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        getList();
+       
+      
+    },[])
+
+    const [search, setsearch] = useState('');
+    const [filteredItems, setFilteredItems] = useState(null);
+    const [category, setCategory] = useState(null);
+
+    const filterProducts = (items, search, category) => {
+        return items?.filter(item => {
+            const matchTitle = item.title.toLowerCase().includes(search.toLowerCase());
+
+            const matchCategory = category
+                ? item.category?.name?.toLowerCase() === category.toLowerCase()
+                : true;
+
+            return matchTitle && matchCategory;
+        });
+    };
+
+    useEffect(() => {
+        if (items) {
+            setFilteredItems(filterProducts(items, search, category));
+        }
+    }, [items, search, category]);
 
     return(
         <ShoppingCartContext.Provider value={
@@ -82,7 +126,14 @@ export const ShoppingCartContextProvider = ({children}) =>{
                     closeCheckout,
                     deleteProductToCard,
                     checkOutOrder,
-                    order
+                    order,
+                    items,
+                    setItems,
+                    search, 
+                    setsearch,
+                    filteredItems,
+                    category,
+                    setCategory
 
                 }
             }>

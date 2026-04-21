@@ -6,10 +6,10 @@ import { ShoppingCartContext } from '../context/CardContext';
 
 const leftRoutes  = [
     {to: '/',text:'All'},
-    {to: '/clothes',text: 'Clothes',},
-    {to: '/electronics',text: 'Electronics'},
-    {to: '/toys',text: 'Toys'},
-    {to: '/others',text: 'Others'}
+    {to: '/category/clothes',text: 'Clothes',},
+    {to: '/category/electronics',text: 'Electronics'},
+    {to: '/category/toys',text: 'Toys'},
+    {to: '/category/others',text: 'Others'}
 ];
 
 const rightRoutes = [
