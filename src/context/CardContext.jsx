@@ -5,6 +5,9 @@ export const ShoppingCartContext = createContext();
 
 export const ShoppingCartContextProvider = ({children}) =>{
    
+    // Estados globales
+    const [account, setAccount] = useState({})
+    const [signOut, setSignOut] = useState(true)
 
    // Estado de carrito ° Contador
    const [cardProducts, setcardProducts] = useState([])
@@ -64,11 +67,8 @@ export const ShoppingCartContextProvider = ({children}) =>{
         setcardProducts(filterProduct);
     }
 
-
     // Get Products
     const [items, setItems] = useState(null)
-
-   
 
     // Efecto para consumir la api
     useEffect(() => {
@@ -83,12 +83,10 @@ export const ShoppingCartContextProvider = ({children}) =>{
         }
 
         getList();
-       
       
     },[])
 
     const [search, setsearch] = useState('');
-    const [filteredItems, setFilteredItems] = useState(null);
     const [category, setCategory] = useState(null);
 
     const filterProducts = (items, search, category) => {
@@ -103,11 +101,7 @@ export const ShoppingCartContextProvider = ({children}) =>{
         });
     };
 
-    useEffect(() => {
-        if (items) {
-            setFilteredItems(filterProducts(items, search, category));
-        }
-    }, [items, search, category]);
+    const filteredItems = filterProducts(items, search, category);
 
     return(
         <ShoppingCartContext.Provider value={
@@ -133,7 +127,11 @@ export const ShoppingCartContextProvider = ({children}) =>{
                     setsearch,
                     filteredItems,
                     category,
-                    setCategory
+                    setCategory,
+                    account,
+                    setAccount,
+                    signOut,
+                    setSignOut
 
                 }
             }>
